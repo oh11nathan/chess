@@ -5,19 +5,19 @@ class Bishop
     # maybe not position as the board can keep track of that
     attr_reader :valid_moves
 
-    def initialize(colour, pos)
+    def initialize(colour, position)
         @colour = colour
         @icon = determine_side(colour)
-        @valid_moves = bishop_valid_moves(pos)
+        @valid_moves = bishop_valid_moves(position)
         # @position = pos
     end
 
     def determine_side(colour)
         case colour
         when "white"
-            # white unicode icon here
+            @icon = "\u2657".encode
         when "black"
-            # black unicode icon here
+            @icon = "\u265D".encode
         else
             # throw some error
         end
@@ -102,4 +102,3 @@ end
 
 # bishop = Bishop.new("white", "E5")
 # puts bishop.valid_moves
-
