@@ -20,7 +20,7 @@ class Rook
     end
 
     def rook_valid_moves(position)
-
+        
     end
     
 end
