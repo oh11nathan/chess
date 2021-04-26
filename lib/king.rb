@@ -41,10 +41,8 @@ class King
         return res
     end
 
-    def adjacent_moves(arr, position)
-        # get node from board
-        # create function to make all the 
-
+    def changed_position(new_position)
+        @valid_moves = king_valid_moves(new_position)
     end
 
 end

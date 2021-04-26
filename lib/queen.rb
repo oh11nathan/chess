@@ -40,6 +40,11 @@ class Queen
 
         return res
     end
+
+    def changed_position(new_position)
+        @valid_moves = queen_valid_moves(new_position)
+    end
+
 end
 
 # some smoke tests

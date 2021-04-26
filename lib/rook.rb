@@ -38,13 +38,18 @@ class Rook
 
         return res
     end
+
+    def changed_position(new_position)
+        @valid_moves = rook_valid_moves(new_position)
+    end
     
 end
 
 
 # some smoke tests
 
-rook = Rook.new("black", "A2")
+# rook = Rook.new("black", "A2")
+rook = Rook.new("black", "E5")
 
 print rook.valid_moves
 print "\n"
