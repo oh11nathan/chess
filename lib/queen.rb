@@ -38,7 +38,7 @@ class Queen
         res.concat(return_cross(position, "s"))
         res.concat(return_cross(position, "w"))
 
-        return res
+        return res.compact
     end
 
     def changed_position(new_position)

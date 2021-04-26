@@ -38,7 +38,7 @@ class King
         res.push(return_cross(position, "s")[0])
         res.push(return_cross(position, "w")[0])
 
-        return res
+        return res.compact
     end
 
     def changed_position(new_position)
