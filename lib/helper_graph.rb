@@ -18,7 +18,7 @@ class Node
     # WARNING: because this is undirected graph, if edge is added to node1 going to node 2, 
     # an edge must also be added to node2 going to node1
     def add_edge(node)
-        @adj_nodes.push(node)
+        @adj_nodes.push(node.position)
     end
 
 end
