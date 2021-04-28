@@ -69,7 +69,13 @@ class Board
         while pos[1] != "0" do
             while pos[0] != "I" do
                 print " "
-                print @board.nodes[pos.join].position
+                piece = @board.nodes[pos.join].piece
+                if piece != nil
+                    print piece.icon
+                else 
+                    print @board.nodes[pos.join].position
+                end
+                # print @board.nodes[pos.join].position
                 print " "
                 letter = pos[0].ord + 1
                 pos[0] = letter.chr
