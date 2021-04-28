@@ -7,11 +7,12 @@ class Node
 
     attr_reader :position
     attr_reader :adj_nodes
+    attr_accessor :piece
 
     def initialize(val)
         @position = val
         @adj_nodes = Array.new
-        # other variables needed: contains
+        @piece = nil
     end
 
     # input will be another node object
