@@ -1,6 +1,11 @@
 
 require_relative 'helper_graph'
-# require_relative 'bishop'
+require_relative 'bishop'
+require_relative 'king'
+require_relative 'knight'
+require_relative 'pawn'
+require_relative 'queen'
+require_relative 'rook'
 
 class Board
 
@@ -83,11 +88,69 @@ class Board
         # pos2 which contains nil/enemy piece now contains node1 --> node2.val = node1
     end
 
+    # function that will populate the board with the appropiate pieces, hardcoded
+    # white pieces are rows 1 and 2, black is 7 and 8
+    # rows 2 and 7 are pawns
+    def populate_board
+        black = "black"
+        white = "white"
+
+        white_pawns = ["A2", "B2", "C2", "D2", "E2", "F2", "G2", "H2"]
+        black_pawns = ["A7", "B7", "C7", "D7", "E7", "F7", "G7", "H7"]
+
+        # create white pawns
+        white_pawns.each do |pos|
+            @board.nodes[pos].piece = create_pawn(white, pos)
+        end
+
+        # create white pieces
+
+        # create black pawns
+        black_pawns.each do |pos|
+            @board.nodes[pos].piece = create_pawn(black, pos)
+        end
+
+        # create black pieces
+
+    end
+
+    # possible for string parameter to determine the piece to be made?
+    def create_bishop(colour, position)
+        bishop = Bishop.new(colour, position)
+        return bishop
+    end
+    
+    def create_king(colour, position)
+        king = King.new(colour, position)
+        return king
+    end
+
+    def create_knight(colour, position)
+        knight = Knight.new(colour, position)
+        return knight
+    end
+
+    def create_pawn(colour, position)
+        pawn = Pawn.new(colour, position)
+        return pawn
+    end
+
+    def create_queen(colour, position)
+        queen = Queen.new(colour, position)
+        return queen
+    end
+
+    def create_rook(colour, position)
+        rook = Rook.new(colour, position)
+        return rook
+    end
+
 end
 
 board = Board.new
 # bishop = Bishop.new("white", "E5")
 
+board.populate_board
 board.view
 # print bishop.valid_moves
 # print "\n"
