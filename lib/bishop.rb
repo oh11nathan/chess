@@ -7,6 +7,7 @@ class Bishop
     # instance variables should include: icon, colour, position
     # maybe not position as the board can keep track of that
     attr_reader :valid_moves
+    attr_reader :icon
 
     def initialize(colour, position)
         @colour = colour

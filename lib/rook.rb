@@ -6,6 +6,7 @@ class Rook
     include GeneralMoves
 
     attr_reader :valid_moves
+    attr_reader :icon
 
     def initialize(colour, position)
         @colour = colour
