@@ -38,7 +38,10 @@ class Pawn
     
     def changed_position(new_position)
         @valid_moves = pawn_valid_moves(new_position)
+        self.completed_one_move?
+    end
 
+    def completed_one_move?
         if !@completed_one_move
             @completed_one_move = true
         end
