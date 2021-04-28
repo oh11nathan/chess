@@ -70,7 +70,7 @@ end
 
 # some smoke test
 
-knight = Knight.new("white", "A1")
+# knight = Knight.new("white", "A1")
 
-print knight.valid_moves
-print "\n"
+# print knight.valid_moves
+# print "\n"

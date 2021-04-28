@@ -51,7 +51,7 @@ end
 
 # some smoke test
 
-pawn = Pawn.new("white", "A1")
+# pawn = Pawn.new("white", "A1")
 
-print pawn.valid_moves
-print "\n"
+# print pawn.valid_moves
+# print "\n"

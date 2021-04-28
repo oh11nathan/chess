@@ -48,6 +48,6 @@ class Queen
 end
 
 # some smoke tests
-queen = Queen.new("black", "E5")
-print queen.valid_moves
-print "\n"
+# queen = Queen.new("black", "E5")
+# print queen.valid_moves
+# print "\n"

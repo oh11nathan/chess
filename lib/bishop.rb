@@ -49,6 +49,6 @@ end
 
 # some smoke tests
 
-bishop = Bishop.new("white", "E5")
-print bishop.valid_moves
-print "\n"
+# bishop = Bishop.new("white", "E5")
+# print bishop.valid_moves
+# print "\n"

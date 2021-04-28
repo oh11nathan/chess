@@ -49,7 +49,7 @@ end
 # some smoke tests
 
 # rook = Rook.new("black", "A2")
-rook = Rook.new("black", "E5")
+# rook = Rook.new("black", "E5")
 
-print rook.valid_moves
-print "\n"
+# print rook.valid_moves
+# print "\n"

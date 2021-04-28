@@ -49,7 +49,7 @@ end
 
 # some smoke test
 
-king = King.new("black", "B2")
+# king = King.new("black", "B2")
 
-print king.valid_moves
-print "\n"
+# print king.valid_moves
+# print "\n"
