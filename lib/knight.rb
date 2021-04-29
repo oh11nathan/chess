@@ -36,8 +36,8 @@ class Knight
         res.push(return_cross(position, "s")[1])
         res.push(return_cross(position, "w")[1])
 
-        print res
-        print "\n"
+        # print res
+        # print "\n"
 
         res = find_adjacent_positions(res.compact)
 
