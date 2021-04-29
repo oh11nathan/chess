@@ -68,6 +68,11 @@ class Board
         pos = ["A", "8"]
         while pos[1] != "0" do
             while pos[0] != "I" do
+                # handle board column legend
+                if pos[0] == "A"
+                    print pos[1]
+                    print " "
+                end
                 print " "
                 piece = @board.nodes[pos.join].piece
                 if piece != nil
@@ -86,6 +91,15 @@ class Board
             pos[1] = num.chr
             pos[0] = "A"
         end
+        # handle board row legend
+        letters = ("a".."h")
+        print "  "
+        letters.each do |let|
+            print " "
+            print let
+            print " "
+        end
+        print "\n"
     end
 
     def move(pos1, pos2)
