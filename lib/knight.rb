@@ -7,6 +7,7 @@ class Knight
 
     attr_reader :valid_moves
     attr_reader :icon
+    attr_reader :colour
 
     def initialize(colour, position)
         @colour = colour
