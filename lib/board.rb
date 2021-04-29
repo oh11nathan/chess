@@ -73,7 +73,8 @@ class Board
                 if piece != nil
                     print piece.icon
                 else 
-                    print @board.nodes[pos.join].position
+                    # print @board.nodes[pos.join].position
+                    print "\u25A2".encode
                 end
                 # print @board.nodes[pos.join].position
                 print " "
@@ -110,6 +111,14 @@ class Board
         end
 
         # create white pieces
+        @board.nodes["E1"].piece = create_king(white, "E1")
+        @board.nodes["D1"].piece = create_queen(white, "D1")
+        @board.nodes["C1"].piece = create_bishop(white, "C1")
+        @board.nodes["F1"].piece = create_bishop(white, "F1")
+        @board.nodes["B1"].piece = create_knight(white, "B1")
+        @board.nodes["G1"].piece = create_knight(white, "G1")
+        @board.nodes["A1"].piece = create_rook(white, "A1")
+        @board.nodes["H1"].piece = create_rook(white, "H1")
 
         # create black pawns
         black_pawns.each do |pos|
@@ -117,6 +126,14 @@ class Board
         end
 
         # create black pieces
+        @board.nodes["E8"].piece = create_king(black, "E8")
+        @board.nodes["D8"].piece = create_queen(black, "D8")
+        @board.nodes["C8"].piece = create_bishop(black, "C8")
+        @board.nodes["F8"].piece = create_bishop(black, "F8")
+        @board.nodes["B8"].piece = create_knight(black, "B8")
+        @board.nodes["G8"].piece = create_knight(black, "G8")
+        @board.nodes["A8"].piece = create_rook(black, "A8")
+        @board.nodes["H8"].piece = create_rook(black, "H8")
 
     end
 
