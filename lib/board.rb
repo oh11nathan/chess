@@ -9,6 +9,8 @@ require_relative 'rook'
 
 class Board
 
+    attr_reader :board
+
     def initialize
         @board = Graph.new
         @board.add_node(Node.new("A1"))
@@ -102,13 +104,6 @@ class Board
         print "\n"
     end
 
-    def move(pos1, pos2)
-        # determine valid moves of piece contained within position
-        # check if pos2 is considered a valid move
-        # pos1 which contains node1 --> node1.val = nil
-        # pos2 which contains nil/enemy piece now contains node1 --> node2.val = node1
-    end
-
     # function that will populate the board with the appropiate pieces, hardcoded
     # white pieces are rows 1 and 2, black is 7 and 8
     # rows 2 and 7 are pawns
@@ -182,6 +177,37 @@ class Board
         return rook
     end
 
+    def move(pos1, pos2)
+        # get thing at pos1, if nil cancel
+        node1 = @board.nodes[pos1]
+        piece1 = node1.piece
+
+        valid_move = piece1 == nil ? false : piece1.valid_moves.include?(pos2)
+
+        # puts valid_move
+        if valid_move
+            # check if pos2 is occupied with ally piece, enemy piece, nil
+            node2 = @board.nodes[pos2]
+            finalize_move(node1, node2)
+        else 
+            # tell user to make a valid move!
+        end
+    end
+
+    def finalize_move(node1, node2)
+        piece1 = node1.piece
+        if node2.piece == nil # moving to empty spot
+            node2.piece = piece1
+            piece1.changed_position(node2.position)
+            node1.piece = nil
+        elsif node2.piece.colour == piece1.colour # spot contains allied piece
+            # tell user to make a valid move!
+        else # spot contains enemy piece
+            node2.piece = piece1
+            node1.piece = nil
+        end
+    end
+
 end
 
 board = Board.new
@@ -189,5 +215,10 @@ board = Board.new
 
 board.populate_board
 board.view
+board.move("B1", "C3")
+board.move("C3", "B5")
+board.move("B5", "C7")
+board.view
+
 # print bishop.valid_moves
 # print "\n"
