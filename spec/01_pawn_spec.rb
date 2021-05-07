@@ -37,25 +37,41 @@ describe Pawn do
         end
 
         context 'upon moving positions' do
-            xit 'returns an array' do
-
+            before do 
+                pawn.changed_position("A2")
             end
-            xit 'returns an array which does not contain nil' do
-            
+            it 'returns an array' do
+                expect(pawn.valid_moves).to be_a(Array)
             end
-            xit 'updates @valid_moves with the correct values' do 
-                
+            it 'returns an array which does not contain nil' do
+                expect(pawn.valid_moves).to_not eq(nil)
+            end
+            it 'updates @valid_moves with the correct values' do 
+                expect(pawn.valid_moves[0]).to eq("A3")
             end
         end
 
     end
 
     describe '#changed_position?' do
-        
+        # see tests for pawn_valid_moves and completed_one_move?
     end
 
     describe '#completed_one_move?' do
-        
+        subject(:pawn) { Pawn.new("white", "A2") }
+        context 'upon initialization' do
+            it 'returns false' do
+                expect(pawn.instance_variable_get(:@completed_one_move)).to be(false)
+            end
+        end
+        context 'upon completing a first move' do
+            before do 
+                pawn.changed_position("A2")
+            end
+            it 'returns true' do
+                expect(pawn.instance_variable_get(:@completed_one_move)).to be(true)
+            end
+        end
     end
 
 end
