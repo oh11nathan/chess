@@ -42,7 +42,7 @@ describe Pawn do
                 expect(pawn.valid_moves).to be_a(Array)
             end
             it 'returns an array which does not contain nil' do
-                expect(pawn.valid_moves).to_not eq(nil)
+                expect(pawn.valid_moves).to_not include(nil)
             end
             it 'updates @valid_moves with the correct values' do 
                 expect(pawn.valid_moves[0]).to eq("A4")
