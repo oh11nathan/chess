@@ -3,10 +3,8 @@ require_relative '../lib/pawn'
 
 describe Pawn do
 
-    subject(:white_pawn) { Pawn.new("white", "A1") }
-
     describe '#initialize' do
-        
+        # only assigning instance variables, see methods that assign variables
     end
 
     describe '#determine_side' do
@@ -38,7 +36,7 @@ describe Pawn do
 
         context 'upon moving positions' do
             before do 
-                pawn.changed_position("A2")
+                pawn.changed_position("A3")
             end
             it 'returns an array' do
                 expect(pawn.valid_moves).to be_a(Array)
@@ -47,7 +45,7 @@ describe Pawn do
                 expect(pawn.valid_moves).to_not eq(nil)
             end
             it 'updates @valid_moves with the correct values' do 
-                expect(pawn.valid_moves[0]).to eq("A3")
+                expect(pawn.valid_moves[0]).to eq("A4")
             end
         end
 
@@ -58,18 +56,18 @@ describe Pawn do
     end
 
     describe '#completed_one_move?' do
-        subject(:pawn) { Pawn.new("white", "A2") }
+        subject(:new_pawn) { Pawn.new("white", "A2") }
         context 'upon initialization' do
             it 'returns false' do
-                expect(pawn.instance_variable_get(:@completed_one_move)).to be(false)
+                expect(new_pawn.instance_variable_get(:@completed_one_move)).to be(false)
             end
         end
         context 'upon completing a first move' do
             before do 
-                pawn.changed_position("A2")
+                new_pawn.changed_position("A3")
             end
             it 'returns true' do
-                expect(pawn.instance_variable_get(:@completed_one_move)).to be(true)
+                expect(new_pawn.instance_variable_get(:@completed_one_move)).to be(true)
             end
         end
     end
