@@ -38,7 +38,7 @@ class Rook
         res.concat(return_cross(pos, "s"))
         res.concat(return_cross(pos, "w"))
 
-        return res
+        return res.compact
     end
 
     def changed_position(new_position)

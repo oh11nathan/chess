@@ -39,7 +39,7 @@ class Bishop
         res.concat(return_diagonal(pos, "se"))
         res.concat(return_diagonal(pos, "sw"))
 
-        return res
+        return res.compact
     end
 
     # to be called when the piece is moved successfully
