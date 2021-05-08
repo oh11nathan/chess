@@ -1,13 +1,17 @@
 
 require_relative 'helper_graph'
-require_relative 'bishop'
-require_relative 'king'
-require_relative 'knight'
-require_relative 'pawn'
-require_relative 'queen'
-require_relative 'rook'
+require_relative 'pieces/bishop'
+require_relative 'pieces/king'
+require_relative 'pieces/knight'
+require_relative 'pieces/pawn'
+require_relative 'pieces/queen'
+require_relative 'pieces/rook'
+
+require_relative 'general_moves'
 
 class Board
+
+    include GeneralMoves
 
     attr_reader :board
 
@@ -175,7 +179,7 @@ class Board
     def create_rook(colour, position)
         rook = Rook.new(colour, position)
         return rook
-    end
+    end 
 
     def move(pos1, pos2)
         # get thing at pos1, if nil cancel
@@ -183,15 +187,66 @@ class Board
         piece1 = node1.piece
 
         valid_move = piece1 == nil ? false : piece1.valid_moves.include?(pos2)
+        clear_path = validate_path(piece1, pos1, pos2)
 
         # puts valid_move
-        if valid_move
+        if valid_move && clear_path
             # check if pos2 is occupied with ally piece, enemy piece, nil
             node2 = @board.nodes[pos2]
             finalize_move(node1, node2)
         else 
             # tell user to make a valid move!
+            puts "YOURE BAD"
         end
+    end
+
+    def validate_path(piece, pos1, pos2)
+        diag = ["nw", "ne", "se", "sw"]
+        cross = ["n", "e", "s", "w"]
+
+        dir = handle_direction(pos1, pos2)
+        
+        if diag.include?(dir)
+            # diagonal direction
+            path = return_diagonal(pos1, dir, Array.new, pos2.split(''))
+        elsif cross.include?(dir)
+            # cross direction
+            path = return_cross(pos1.split(''), dir, Array.new, pos2.split(''))
+        else
+            # dir is nil and type check knight
+        end
+
+        # check every single piece except final to ensure clear path
+        clear = true
+        path.each do |pos|
+            if @board.nodes[pos].piece != nil
+                clear = false
+            end
+        end
+
+        return clear
+    end
+
+    def handle_direction(pos_1, pos_2)
+        pos1 = pos_1.chars
+        pos2 = pos_2.chars
+
+        if pos1[0] == pos2[0] # moving up / down
+            res = pos1[1].to_i < pos2[1].to_i ? "n" : "s"
+        elsif pos1[1] == pos2[1] # moving left / right
+            res = pos1[0].ord < pos2[0].ord ? "w" : "e"
+        elsif pos1[0].ord > pos2[0].ord && pos1[1].ord < pos2[1].ord # moving nw
+            res = "nw"
+        elsif pos1[0].ord < pos2[0].ord && pos1[1].ord < pos2[1].ord # moving ne
+            res = "ne"
+        elsif pos1[0].ord < pos2[0].ord && pos1[1].ord > pos2[1].ord # moving se
+            res = "se"
+        elsif pos1[0].ord > pos2[0].ord && pos1[1].ord > pos2[1].ord # moving sw
+            res = "sw"
+        else
+            res = nil
+        end
+        return res
     end
 
     def finalize_move(node1, node2)
@@ -215,9 +270,9 @@ board = Board.new
 
 board.populate_board
 board.view
-board.move("B1", "C3")
-board.move("C3", "B5")
-board.move("B5", "C7")
+board.move("A2", "A3")
+board.move("A1", "A2")
+board.move("A2", "A3")
 board.view
 
 # print bishop.valid_moves

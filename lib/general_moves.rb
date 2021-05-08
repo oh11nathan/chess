@@ -11,42 +11,51 @@ module GeneralMoves
     # recursive function that handles each diagonal direction, would like to refactor at some point
     # looking at it I know that there is a better way, just don't know how yet
     # main problem is the fact that each direction has a specific base case
-    def return_diagonal(pos, direction, valid_moves = Array.new)
+    def return_diagonal(pos, direction, valid_moves = Array.new, pos2 = nil)
         case direction
         when "nw"
             # check for boundry conditions for this case
             if pos.include?("A") || pos.include?("8")
                 # push current position to some array and return
                 return valid_moves
+            elsif pos == pos2
+                # special case for validating a clear path, that is the only case where optional argument pos2 will be used
+                return valid_moves
             else
                 # move in nw direction
                 new_pos = move_diagonally(pos, false, true)
                 valid_moves.push(new_pos.join)
-                res = return_diagonal(new_pos, "nw", valid_moves)
+                res = return_diagonal(new_pos, "nw", valid_moves, pos2)
             end
         when "ne"
             if pos.include?("H") || pos.include?("8")
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_diagonally(pos, true, true)
                 valid_moves.push(new_pos.join)
-                res = return_diagonal(new_pos, "ne", valid_moves)
+                res = return_diagonal(new_pos, "ne", valid_moves, pos2)
             end
         when "se"
             if pos.include?("H") || pos.include?("1")
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_diagonally(pos, true, false)
                 valid_moves.push(new_pos.join)
-                res = return_diagonal(new_pos, "se", valid_moves)
+                res = return_diagonal(new_pos, "se", valid_moves, pos2)
             end
         when "sw"
             if pos.include?("A") || pos.include?("1")
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_diagonally(pos, false, false)
                 valid_moves.push(new_pos.join)
-                res = return_diagonal(new_pos, "sw", valid_moves)
+                res = return_diagonal(new_pos, "sw", valid_moves, pos2)
             end
         end
         return res
@@ -67,39 +76,47 @@ module GeneralMoves
 
     # rook functionality
     # basically the same implementation as bishop except in north, east, south directions
-    def return_cross(pos, direction, valid_moves = Array.new)
+    def return_cross(pos, direction, valid_moves = Array.new, pos2 = nil)
         case direction
         when "n"
             if pos[1] == "8"
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_up_down(pos, true)
                 valid_moves.push(new_pos.join)
-                res = return_cross(new_pos, "n", valid_moves)
+                res = return_cross(new_pos, "n", valid_moves, pos2)
             end
         when "e"
             if pos[0] == "H"
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_left_right(pos, false)
                 valid_moves.push(new_pos.join)
-                res = return_cross(new_pos, "e", valid_moves)
+                res = return_cross(new_pos, "e", valid_moves, pos2)
             end
         when "s"
             if pos[1] == "1"
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_up_down(pos, false)
                 valid_moves.push(new_pos.join)
-                res = return_cross(new_pos, "s", valid_moves)
+                res = return_cross(new_pos, "s", valid_moves, pos2)
             end
         when "w"
             if pos[0] == "A"
                 return valid_moves
+            elsif pos == pos2
+                return valid_moves
             else
                 new_pos = move_left_right(pos, true)
                 valid_moves.push(new_pos.join)
-                res = return_cross(new_pos, "w", valid_moves)
+                res = return_cross(new_pos, "w", valid_moves, pos2)
             end
         end
         return res
