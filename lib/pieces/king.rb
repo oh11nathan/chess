@@ -47,6 +47,14 @@ class King
         @valid_moves = king_valid_moves(new_position)
     end
 
+    def check_check?
+        # check if the king is threatened by check
+    end
+
+    def check_checkmate?
+        # check if the game is over
+    end
+
 end
 
 # some smoke test
